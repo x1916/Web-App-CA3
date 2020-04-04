@@ -1,0 +1,26 @@
+﻿{% extends "app/layout.html" %}
+
+{% block content %}
+
+
+
+<div class="jumbotron">
+    <h2>Sign up Form</h2>
+
+
+ 
+
+ <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <script src='https://www.google.com/recaptcha/api.js'></script>
+    <div class="g-recaptcha" data-sitekey="6LczJ-MUAAAAAL58M91aOK5CtvcisqLNQMtJqco1"></div>
+
+    <button type="submit" class="btn btn-primary">Register</button>
+  </form>
+
+
+</div>
+
+{% endblock %}
