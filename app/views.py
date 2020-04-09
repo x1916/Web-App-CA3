@@ -10,12 +10,6 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
 
-""" Recaptcha Imports """
-
-#import urllib
-#import json
-#from django.contrib import messages
-
 
 def home(request):
     """Renders the home page."""
@@ -83,6 +77,7 @@ def login(request, user):
 
 
 def register(request):
+
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
         if form.is_valid():
@@ -94,7 +89,7 @@ def register(request):
             return redirect('home')
     else:
         form = UserCreationForm()
-    return render(request, 'app/register.html', {'form': form})
+    return render(request, 'app/register.html', {'title':'Register', 'year':datetime.now().year, 'form': form})
 
 
 def regsuccess(request):

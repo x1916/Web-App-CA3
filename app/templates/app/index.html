@@ -16,7 +16,19 @@
 -->
 
 
+{% if user.is_authenticated %}
+<div class="row">
+    <div class="col-md-4">
+        <h2>Search Database</h2>
+        <p>
+            You have successfully logged on. Search the secret database.
+        </p>
+        <p><a class="btn btn-default" href=regsuccess>Search &raquo;</a></p>
+    </div>
+</div>
 
+
+{% else %}
 <div class="row">
     <div class="col-md-4">
         <h2>Login</h2>
@@ -36,5 +48,6 @@
         <p><a class="btn btn-default" href=regsuccess>Register &raquo;</a></p>
     </div>
 </div>
+{% endif %}
 
 {% endblock %}
