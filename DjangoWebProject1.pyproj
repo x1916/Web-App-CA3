@@ -57,6 +57,7 @@
     <Folder Include="DjangoWebProject1\" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\templates\app\success.html" />
     <Content Include="app\templates\app\register.html" />
     <Content Include="Procfile" />
     <Content Include="requirements.txt" />

@@ -42,6 +42,19 @@ def contact(request):
         }
     )
 
+def success(request):
+    """Renders the successful registration page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/success.html',
+        {
+            'title':'Success',
+            'message':'Registration Successul.',
+            'year':datetime.now().year,
+        }
+    )
+
 def about(request):
     """Renders the about page."""
     assert isinstance(request, HttpRequest)
@@ -56,7 +69,7 @@ def about(request):
     )
 
 def login(request, user):
-    """Renders the about page."""
+    """Renders the login page."""
     assert isinstance(request, HttpRequest)
     return render(
         request,
@@ -79,6 +92,30 @@ def register(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('home')
+        else:
+            return redirect('regsuccess')
     else:
         form = UserCreationForm()
-    return render(request, 'app/register.html', {'title':'Register', 'form': form, 'year':datetime.now().year})
+        return render(
+            request, 
+            'app/register.html',
+            {
+                'title':'Register',
+                'form': form,
+                'year':datetime.now().year
+            }
+    )
+
+
+def regsuccess(request):
+    """Renders the successful registration page."""
+    assert isinstance(request, HttpRequest)
+    return render(
+        request,
+        'app/success.html',
+        {
+            'title':'Registration Successful',
+            'message':'User Account Created',
+            'year':datetime.now().year,
+        }
+    )
