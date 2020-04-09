@@ -70,42 +70,15 @@ def login(request, user):
 
 
 def register(request):
-    form = UserCreationForm(request.POST)
-
-    if form.is_valid():
-
-            ''' Begin reCAPTCHA validation '''
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
-            values = {
-                'secret': settings.GOOGLE_RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response,
-            }
-            data = urllib.urlencode(values)
-            req = urllib.Request(url, data)
-            response = urllib2.urlopen(req)
-            result = json.load(response)
-            ''' End reCAPTCHA validation '''
-
-            if result['success']:
-                  
-                form.save()
-                username = form.cleaned_data.get('username')
-                password = form.cleaned_data.get('password1')
-                user = authenticate(username=username, password=password)
-                login(request, user)
-                return redirect('home')
-                messages.success(request, 'New user added with success!')
-            else:
-                messages.error(request, 'Invalid reCAPTCHA. Please try again.')
-
-
-    return render(request, 'app/register.html',
-        {
-            'title':'Register',
-            'message':'Register a new account.',
-            'form': form,
-            'year':datetime.now().year,
-        }
-    )
-
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            raw_password = form.cleaned_data.get('password1')
+            user = authenticate(username=username, password=raw_password)
+            login(request, user)
+            return redirect('home')
+    else:
+        form = UserCreationForm()
+    return render(request, 'app/register.html', {'title':'Register', 'form': form, 'year':datetime.now().year})

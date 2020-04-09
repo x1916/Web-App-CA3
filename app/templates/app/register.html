@@ -1,23 +1,23 @@
 ﻿{% extends "app/layout.html" %}
 
 {% block content %}
-
-
-
-<div class="jumbotron">
-    <h2>Register New Account</h2>
-
- <form method="post">
+  <h2>Sign up</h2>
+  <form method="post">
     {% csrf_token %}
-    {{ form.as_p }}
-
+    {% for field in form %}
+      <p>
+        {{ field.label_tag }}<br>
+        {{ field }}
+        {% if field.help_text %}
+          <small style="color: grey">{{ field.help_text }}</small>
+        {% endif %}
+        {% for error in field.errors %}
+          <p style="color: red">{{ error }}</p>
+        {% endfor %}
+      </p>
+    {% endfor %}
     <script src='https://www.google.com/recaptcha/api.js'></script>
     <div class="g-recaptcha" data-sitekey="6LczJ-MUAAAAAL58M91aOK5CtvcisqLNQMtJqco1"></div>
-
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit">Sign up</button>
   </form>
-
-
-</div>
-
 {% endblock %}
