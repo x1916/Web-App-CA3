@@ -12,9 +12,9 @@ from django.shortcuts import render, redirect
 
 """ Recaptcha Imports """
 
-import urllib
-import json
-from django.contrib import messages
+#import urllib
+#import json
+#from django.contrib import messages
 
 
 def home(request):
@@ -92,19 +92,9 @@ def register(request):
             user = authenticate(username=username, password=raw_password)
             login(request, user)
             return redirect('home')
-        else:
-            return redirect('regsuccess')
     else:
         form = UserCreationForm()
-        return render(
-            request, 
-            'app/register.html',
-            {
-                'title':'Register',
-                'form': form,
-                'year':datetime.now().year
-            }
-    )
+    return render(request, 'app/register.html', {'form': form})
 
 
 def regsuccess(request):
