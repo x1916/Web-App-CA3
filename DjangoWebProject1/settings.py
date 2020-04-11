@@ -41,6 +41,9 @@ GOOGLE_RECAPTCHA_SECRET_KEY = '6LdRSRYUAAAAAOnk5yomm1dI9BmQkJWTg_wIlMJ_'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# Security Features. Force SSL/TLS and allowed hosts.
+
+SECURE_SSL_REDIRECT = True
 ALLOWED_HOSTS = ['localhost', 'ca3-secure-web-app.herokuapp.com']
 
 # Application references
