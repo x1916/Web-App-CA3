@@ -39,12 +39,8 @@ SECRET_KEY = '453c8653-7fa5-4cc2-afd7-b4aaeffedb72'
 GOOGLE_RECAPTCHA_SECRET_KEY = '6LdRSRYUAAAAAOnk5yomm1dI9BmQkJWTg_wIlMJ_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# Security Features. Force SSL/TLS and allowed hosts.
-
-SECURE_SSL_REDIRECT = True
-ALLOWED_HOSTS = ['localhost', 'ca3-secure-web-app.herokuapp.com']
 
 # Application references
 # https://docs.djangoproject.com/en/2.1/ref/settings/#std:setting-INSTALLED_APPS
@@ -74,6 +70,21 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'DjangoWebProject1.urls'
+
+# Security Features. Force SSL/TLS and allowed hosts.
+
+SECURE_SSL_REDIRECT = True
+ALLOWED_HOSTS = ['localhost', 'ca3-secure-web-app.herokuapp.com']
+
+# Only transmit cookies over HTTPS.
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+# XSS security,
+
+SECURE_BROWSER_XSS_FILTER = True
+
 
 # Template configuration
 # https://docs.djangoproject.com/en/2.1/topics/templates/
