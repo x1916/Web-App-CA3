@@ -30,8 +30,7 @@ def contact(request):
         request,
         'app/contact.html',
         {
-            'title':'Contact',
-            'message':'Your contact page.',
+            'title':'Contact Me',
             'year':datetime.now().year,
         }
     )
@@ -56,8 +55,7 @@ def about(request):
         request,
         'app/about.html',
         {
-            'title':'About',
-            'message':'Your application description page.',
+            'title':'About This Web-Application',
             'year':datetime.now().year,
         }
     )
@@ -69,8 +67,8 @@ def login(request, user):
         request,
         'app/login.html',
         {
-            'title':'About',
-            'message':'Your application description page.',
+            'title':'Login',
+            'message':'Enter login credentials here.',
             'year':datetime.now().year,
         }
     )
@@ -93,14 +91,18 @@ def register(request):
 
 
 def regsuccess(request):
-    """Renders the successful registration page."""
-    assert isinstance(request, HttpRequest)
-    return render(
-        request,
-        'app/success.html',
-        {
-            'title':'Registration Successful',
-            'message':'User Account Created',
-            'year':datetime.now().year,
-        }
+    """ Check if user is authenticated or not. If not, kick back to homepage."""
+    if request.user.is_authenticated:
+        """Renders the successful registration page."""
+        assert isinstance(request, HttpRequest)
+        return render(
+            request,
+            'app/success.html',
+            {
+                'title':'User Authentication Completed',
+                'message':'Viewing Authenticated Web Page',
+                'year':datetime.now().year,
+            }
     )
+    else:
+        return redirect('home')
